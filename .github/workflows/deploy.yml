@@ -73,7 +73,7 @@ jobs:
           aws lightsail get-container-images --service-name ${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
       - name: Deploy
         run: |
-          export $(cat .env | grep -v ^#)
+          export $(cat .env| grep -v '#' | xargs)
           echo $MM_SQLSETTINGS_DATASOURCE
           service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("mmapp-db")) | .image' > db_image.txt
