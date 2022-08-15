@@ -20,12 +20,12 @@ jobs:
           sudo apt-get install -y jq unzip
       - name: Install AWS Client and LightsailControl Plugin
         run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip
           unzip awscliv2.zip
           sudo ./aws/install || true
           aws --version
-          curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "lightsailctl"
-          sudo mv "lightsailctl" "/usr/local/bin/lightsailctl"
+          curl https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl -o lightsailctl
+          sudo mv lightsailctl /usr/local/bin/lightsailctl
           sudo chmod +x /usr/local/bin/lightsailctl
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -33,7 +33,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      - name: Build Docker Image
+      - name: Pull and Build Docker Image
         run: |
           docker pull dpage/pgadmin4
           docker pull mattermost/mattermost-enterprise-edition:7.1.2
@@ -44,7 +44,6 @@ jobs:
         run: |
           service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
           aws lightsail get-container-images --service-name ${service_name} | jq -r --raw-output '.containerImages[] | .image' > image.txt
-          cat image.txt
           while read line; do aws lightsail delete-container-image --image $line --service-name ${service_name}; done < image.txt
       - name: Push Image
         run: |
@@ -52,7 +51,7 @@ jobs:
           aws lightsail push-container-image \
             --region ${{ env.AWS_REGION }} \
             --service-name ${service_name} \
-            --label mmapp-db \
+            --label db \
             --image mmapp-db
           aws lightsail push-container-image \
             --region ${{ env.AWS_REGION }} \
@@ -75,6 +74,5 @@ jobs:
       - name: Deploy
         run: |
           service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
-          aws lightsail get-container-images --service-name ${service_name} | jq --raw-output ".containerImages[0].image" > image.txt
-          jq --arg image $(cat image.txt) '.containers.app.image = $image' container.template.json > container.json
-          aws lightsail create-container-service-deployment --service-name ${service_name} --cli-input-json file://$(pwd)/container.json
+          mattermost_image = aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("mattermost")) | .image'
+          echo mattermost_image
