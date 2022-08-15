@@ -79,7 +79,7 @@ jobs:
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("mmapp-db")) | .image' > db_image.txt
           cat db_image.txt
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("pgadmin")) | .image' > pgadmin_image.txt
-          cat pgadmin.txt
+          cat pgadmin_image.txt
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("mattermost")) | .image' > mm_image.txt
           cat mm_image.txt
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("nginx")) | .image' > nginx_image.txt
