@@ -73,9 +73,13 @@ jobs:
           aws lightsail get-container-images --service-name ${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
       - name: Deploy
         run: |
-          source ./.env
+          export $(cat .env | grep -v ^#)
+          echo $MM_SQLSETTINGS_DATASOURCE
           service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("mmapp-db")) | .image' > db_image.txt
+          cat db_image.txt
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("mattermost")) | .image' > mm_image.txt
+          cat mm_image.txt
           jq --arg db_image $(cat db_image.txt) --arg mm_image $(cat mm_image.txt) '.containers.db.image='$db_image container.template.json > container.json
           cat container.json
+          aws lightsail create-container-service-deployment --service-name ${service_name} --cli-input-json file://$(pwd)/container.json
