@@ -51,7 +51,7 @@ jobs:
           aws lightsail push-container-image \
             --region ${{ env.AWS_REGION }} \
             --service-name ${service_name} \
-            --label db \
+            --label mmapp-db \
             --image mmapp-db
           aws lightsail push-container-image \
             --region ${{ env.AWS_REGION }} \
@@ -74,5 +74,9 @@ jobs:
       - name: Deploy
         run: |
           service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
+          db_image = aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("mmapp-db")) | .image'
           mattermost_image = aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("mattermost")) | .image'
-          echo mattermost_image
+          echo $db_image
+          echo $mattermost_image
+          jq '.containers.db.image='$db_image container.template.json > container.json
+          cat container.json
