@@ -10,7 +10,60 @@
                 "DB_LANG": "ja_JP"
             },
             "ports": {
-                "KeyName": "TCP"
+                "5432": 5432
+            }
+        },
+        "pgadmin": {
+            "image": "",
+            "command": [
+                ""
+            ],
+            "environment": {
+                "PGADMIN_DEFAULT_EMAIL": "",
+                "PGADMIN_DEFAULT_PASSWORD": ""
+            },
+            "ports": {
+                "80": 80
+            }
+        },
+        "mattermost": {
+            "image": "",
+            "command": [
+                ""
+            ],
+            "environment": {
+                "TZ": "",
+                "MM_SQLSETTINGS_DRIVERNAME": "",
+                "MM_SQLSETTINGS_DATASOURCE": "",
+                "MM_SERVICESETTINGS_SITEURL": "",
+                "MM_SERVICESETTINGS_ENABLEAPICHANNELDELETION": "",
+                "MM_SERVICESETTINGS_ENABLETUTORIAL": "",
+                "MM_LOCALIZATIONSETTINGS_DEFAULTSERVERLOCALE": "",
+                "MM_LOCALIZATIONSETTINGS_DEFAULTCLIENTLOCALE": "",
+                "MM_TEAMSETTINGS_MAXUSERSPERTEAM": "",
+                "MM_TEAMSETTINGS_MAXCHANNELSPERTEAM": "",
+                "MM_PLUGINSETTINGS_ENABLE": "",
+                "MM_PLUGINSETTINGS_ENABLEUPLOADS": "",
+                "MM_BLEVESETTINGS_INDEXDIR": "",
+                "MM_BLEVESETTINGS_ENABLEINDEXING": "",
+                "MM_BLEVESETTINGS_ENABLESEARCHING": "",
+                "MM_BLEVESETTINGS_ENABLEAUTOCOMPLETE": ""
+            },
+            "ports": {
+                "8080": 80
+            }
+        },
+        "nginx": {
+            "image": "",
+            "command": [
+                ""
+            ],
+            "environment": {
+            },
+            "ports": {
+                "443": 443,
+                "80": 80,
+                "8080": 8080
             }
         }
     },
