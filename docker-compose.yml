@@ -28,10 +28,10 @@ services:
                           source: ${POSTGRES_SCRIPT_PATH}
                           target: /docker-entrypoint-initdb.d
                           read_only: true
-                # environment:
-                #         - POSTGRES_USER
-                #         - POSTGRES_PASSWORD
-                #         - POSTGRES_DB
+                environment:
+                        - POSTGRES_USER
+                        - POSTGRES_PASSWORD
+                        - POSTGRES_DB
         pgadmin:
                 depends_on:
                         - db
