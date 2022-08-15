@@ -40,7 +40,7 @@ jobs:
           docker pull nginx
           docker compose build
           docker image ls
-      - name: Push and Deploy
+      - name: Push
         run: |
           service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
           aws lightsail push-container-image \
@@ -63,6 +63,12 @@ jobs:
             --service-name ${service_name} \
             --label nginx \
             --image nginx
+      - name: Confirm
+        run: |
+          aws lightsail get-container-images --service-name ${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
+      - name: Deploy
+        run: |
+          service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output ".containerImages[0].image" > image.txt
           jq --arg image $(cat image.txt) '.containers.app.image = $image' container.template.json > container.json
           aws lightsail create-container-service-deployment --service-name ${service_name} --cli-input-json file://$(pwd)/container.json
