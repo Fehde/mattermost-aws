@@ -45,7 +45,7 @@ jobs:
           service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
           aws lightsail get-container-images --service-name ${service_name} | jq -r --raw-output '.containerImages[] | .image' > image.txt
           cat image.txt
-          while read line do aws lightsail delete-container-image --image $line --service-name ${service_name} done < image.txt
+
       - name: Push Image
         run: |
           service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
