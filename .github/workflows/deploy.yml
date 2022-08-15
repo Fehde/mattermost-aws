@@ -44,8 +44,9 @@ jobs:
         run: |
           service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | .image' > image.txt
+          cat image.txt
           while read line do aws lightsail delete-container-image --image $line --service-name ${service_name} done < image.txt
-      - name: Push
+      - name: Push Image
         run: |
           service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
           aws lightsail push-container-image \
@@ -68,7 +69,7 @@ jobs:
             --service-name ${service_name} \
             --label nginx \
             --image nginx
-      - name: Confirm
+      - name: Confirm Image
         run: |
           aws lightsail get-container-images --service-name ${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
       - name: Deploy
