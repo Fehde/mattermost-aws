@@ -30,7 +30,7 @@ services:
                           read_only: true
                 environment:
                         - POSTGRES_USER
-                        - POSTGRES_PASSWORD
+                        # - POSTGRES_PASSWORD
                         - POSTGRES_DB
         pgadmin:
                 depends_on:
