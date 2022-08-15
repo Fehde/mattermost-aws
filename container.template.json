@@ -1,0 +1,29 @@
+{
+    "serviceName": "",
+    "containers": {
+        "db": {
+            "image": "",
+            "command": [
+                ""
+            ],
+            "environment": {
+                "DB_LANG": "ja_JP"
+            },
+            "ports": {
+                "KeyName": "TCP"
+            }
+        }
+    },
+    "publicEndpoint": {
+        "containerName": "",
+        "containerPort": 0,
+        "healthCheck": {
+            "healthyThreshold": 0,
+            "unhealthyThreshold": 0,
+            "timeoutSeconds": 0,
+            "intervalSeconds": 0,
+            "path": "",
+            "successCodes": ""
+        }
+    }
+}
