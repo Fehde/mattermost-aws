@@ -76,7 +76,7 @@ jobs:
           service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
           db_image = aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("mmapp-db")) | .image'
           mattermost_image = aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("mattermost")) | .image'
-          echo $db_image
-          echo $mattermost_image
-          jq '.containers.db.image='$db_image container.template.json > container.json
+          echo ${db_image}
+          echo ${mattermost_image}
+          jq '.containers.db.image='${db_image} container.template.json > container.json
           cat container.json
