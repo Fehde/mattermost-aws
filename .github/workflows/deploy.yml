@@ -44,7 +44,7 @@ jobs:
             --region ${{ env.AWS_REGION }} \
             --service-name ${service_name} \
             --label ${service_name} \
-            --image mmapp_db:latest
+            --image mmapp-db:latest
           aws lightsail push-container-image \
             --region ${{ env.AWS_REGION }} \
             --service-name ${service_name} \
