@@ -102,23 +102,23 @@ services:
                         # - type: bind
                         #   source: ${MATTERMOST_BLEVE_INDEXES_PATH}
                         #   target: /mattermost/bleve-indexes
-                # environment:
-                #         - TZ
-                #         - MM_SQLSETTINGS_DRIVERNAME
-                #         - MM_SQLSETTINGS_DATASOURCE
-                #         - MM_SERVICESETTINGS_SITEURL
-                #         - MM_SERVICESETTINGS_ENABLEAPICHANNELDELETION
-                #         - MM_SERVICESETTINGS_ENABLETUTORIAL
-                #         - MM_LOCALIZATIONSETTINGS_DEFAULTSERVERLOCALE
-                #         - MM_LOCALIZATIONSETTINGS_DEFAULTCLIENTLOCALE
-                #         - MM_TEAMSETTINGS_MAXUSERSPERTEAM
-                #         - MM_TEAMSETTINGS_MAXCHANNELSPERTEAM
-                #         - MM_PLUGINSETTINGS_ENABLE
-                #         - MM_PLUGINSETTINGS_ENABLEUPLOADS
-                #         - MM_BLEVESETTINGS_INDEXDIR
-                #         - MM_BLEVESETTINGS_ENABLEINDEXING
-                #         - MM_BLEVESETTINGS_ENABLESEARCHING
-                #         - MM_BLEVESETTINGS_ENABLEAUTOCOMPLETE
+                environment:
+                        - TZ
+                        - MM_SQLSETTINGS_DRIVERNAME
+                        - MM_SQLSETTINGS_DATASOURCE
+                        - MM_SERVICESETTINGS_SITEURL
+                        - MM_SERVICESETTINGS_ENABLEAPICHANNELDELETION
+                        - MM_SERVICESETTINGS_ENABLETUTORIAL
+                        - MM_LOCALIZATIONSETTINGS_DEFAULTSERVERLOCALE
+                        - MM_LOCALIZATIONSETTINGS_DEFAULTCLIENTLOCALE
+                        - MM_TEAMSETTINGS_MAXUSERSPERTEAM
+                        - MM_TEAMSETTINGS_MAXCHANNELSPERTEAM
+                        - MM_PLUGINSETTINGS_ENABLE
+                        - MM_PLUGINSETTINGS_ENABLEUPLOADS
+                        - MM_BLEVESETTINGS_INDEXDIR
+                        - MM_BLEVESETTINGS_ENABLEINDEXING
+                        - MM_BLEVESETTINGS_ENABLESEARCHING
+                        - MM_BLEVESETTINGS_ENABLEAUTOCOMPLETE
                 #         - MM_PLUGINSETTINGS_CLIENTDIRECTORY=/opt/mattermost/client/plugins
                 # command: |
                 #         sh -c
