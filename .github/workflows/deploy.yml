@@ -43,23 +43,23 @@ jobs:
           aws lightsail push-container-image \
             --region ${{ env.AWS_REGION }} \
             --service-name ${service_name} \
-            --label ${service_name} \
-            --image mmapp-db:latest
+            --label mmapp-db \
+            --image mmapp-db
           aws lightsail push-container-image \
             --region ${{ env.AWS_REGION }} \
             --service-name ${service_name} \
-            --label ${service_name} \
-            --image dpage/pgadmin4:latest
+            --label pgadmin \
+            --image dpage/pgadmin4
           aws lightsail push-container-image \
             --region ${{ env.AWS_REGION }} \
             --service-name ${service_name} \
-            --label ${service_name} \
+            --label mattermost \
             --image mattermost/mattermost-enterprise-edition:7.1.2
           aws lightsail push-container-image \
             --region ${{ env.AWS_REGION }} \
             --service-name ${service_name} \
-            --label ${service_name} \
-            --image nginx:latest
+            --label nginx \
+            --image nginx
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output ".containerImages[0].image" > image.txt
           jq --arg image $(cat image.txt) '.containers.app.image = $image' container.template.json > container.json
           aws lightsail create-container-service-deployment --service-name ${service_name} --cli-input-json file://$(pwd)/container.json
