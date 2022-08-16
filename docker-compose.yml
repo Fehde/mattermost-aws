@@ -14,20 +14,20 @@ services:
                 pids_limit: 100
                 expose:
                         - 5432
-                volumes:
-                        - type: bind
-                          source: /var/postgresql/docker
-                          target: /host
-                        #         - type: bind
-                        #           source: ${POSTGRES_DATA_PATH}
-                        #           target: /var/lib/postgresql/data
-                        #         - type: bind
-                        #           source: ${POSTGRES_DATABK_PATH}
-                        #           target: /var/lib/postgresql/data_bk
-                        - type: bind
-                          source: ${POSTGRES_SCRIPT_PATH}
-                          target: /docker-entrypoint-initdb.d
-                          read_only: true
+                # volumes:
+                #         - type: bind
+                #           source: /var/postgresql/docker
+                #           target: /host
+                #         - type: bind
+                #           source: ${POSTGRES_DATA_PATH}
+                #           target: /var/lib/postgresql/data
+                #         - type: bind
+                #           source: ${POSTGRES_DATABK_PATH}
+                #           target: /var/lib/postgresql/data_bk
+                #         - type: bind
+                #           source: ${POSTGRES_SCRIPT_PATH}
+                #           target: /docker-entrypoint-initdb.d
+                #           read_only: true
                 environment:
                         - POSTGRES_USER
                         - POSTGRES_PASSWORD
@@ -78,30 +78,30 @@ services:
                 pids_limit: 200
                 expose:
                         - 8065
-                tmpfs:
-                        - /tmp
-                volumes:
-                        - type: bind
-                          source: /var/mattermost/docker
-                          target: /host
-                        # - type: bind
-                        #   source: ${MATTERMOST_CONFIG_PATH}
-                        #   target: /mattermost/config
-                        # - type: bind
-                        #   source: ${MATTERMOST_DATA_PATH}
-                        #   target: /mattermost/data
-                        # - type: bind
-                        #   source: ${MATTERMOST_LOGS_PATH}
-                        #   target: /mattermost/logs
-                        # - type: bind
-                        #   source: ${MATTERMOST_PLUGINS_PATH}
-                        #   target: /mattermost/plugins
-                        # - type: bind
-                        #   source: ${MATTERMOST_CLIENT_PLUGINS_PATH}
-                        #   target: /mattermost/client/plugins
-                        # - type: bind
-                        #   source: ${MATTERMOST_BLEVE_INDEXES_PATH}
-                        #   target: /mattermost/bleve-indexes
+                # tmpfs:
+                #         - /tmp
+                # volumes:
+                #         - type: bind
+                #           source: /var/mattermost/docker
+                #           target: /host
+                #         - type: bind
+                #           source: ${MATTERMOST_CONFIG_PATH}
+                #           target: /mattermost/config
+                #         - type: bind
+                #           source: ${MATTERMOST_DATA_PATH}
+                #           target: /mattermost/data
+                #         - type: bind
+                #           source: ${MATTERMOST_LOGS_PATH}
+                #           target: /mattermost/logs
+                #         - type: bind
+                #           source: ${MATTERMOST_PLUGINS_PATH}
+                #           target: /mattermost/plugins
+                #         - type: bind
+                #           source: ${MATTERMOST_CLIENT_PLUGINS_PATH}
+                #           target: /mattermost/client/plugins
+                #         - type: bind
+                #           source: ${MATTERMOST_BLEVE_INDEXES_PATH}
+                #           target: /mattermost/bleve-indexes
                 environment:
                         - TZ
                         - MM_SQLSETTINGS_DRIVERNAME
@@ -139,21 +139,21 @@ services:
                 tmpfs:
                         - /var/run
                         - /var/cache
-                volumes:
-                        - type: bind
-                          source: /var/nginx/docker
-                          target: /host
-                        - type: bind
-                          source: ${NGINX_CONFIG_PATH}
-                          target: /etc/nginx/conf.d
-                        #   read_only: true
-                        # - ${NGINX_DHPARAMS_FILE}:/dhparams4096.pem
-                        # - ${CERT_PATH}:/cert.pem:ro
-                        # - ${KEY_PATH}:/key.pem:ro
-                        # - shared-webroot:/usr/share/nginx/html
-                        - type: bind
-                          source: ${NGINX_LOG_PATH}
-                          target: /var/log/nginx
+                # volumes:
+                #         - type: bind
+                #           source: /var/nginx/docker
+                #           target: /host
+                #         - type: bind
+                #           source: ${NGINX_CONFIG_PATH}
+                #           target: /etc/nginx/conf.d
+                #           read_only: true
+                #         - ${NGINX_DHPARAMS_FILE}:/dhparams4096.pem
+                #         - ${CERT_PATH}:/cert.pem:ro
+                #         - ${KEY_PATH}:/key.pem:ro
+                #         - shared-webroot:/usr/share/nginx/html
+                #         - type: bind
+                #           source: ${NGINX_LOG_PATH}
+                #           target: /var/log/nginx
                 environment:
                         - TZ
                 ports:
