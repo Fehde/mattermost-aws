@@ -69,7 +69,7 @@
     },
     "publicEndpoint": {
         "containerName": "nginx",
-        "containerPort": 0,
+        "containerPort": 80,
         "healthCheck": {
             "healthyThreshold": 0,
             "unhealthyThreshold": 0,
