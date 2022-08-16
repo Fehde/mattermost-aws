@@ -77,7 +77,7 @@ jobs:
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '[.containerImages[] | select(.image | contains("mattermost")) | .image][0]' > mm_image.txt
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '[.containerImages[] | select(.image | contains("nginx")) | .image][0]' > nginx_image.txt
           cat container.template.json \
-          | jq '.serviceName=$service_name' \
+          | jq '.serviceName=${service_name}' \
           | jq --arg db_image $(cat db_image.txt) '.containers.db.image=$db_image' \
           | jq --arg mm_image $(cat mm_image.txt) '.containers.mattermost.image=$mm_image' \
           | jq --arg nginx_image $(cat nginx_image.txt) '.containers.nginx.image=$nginx_image' \
