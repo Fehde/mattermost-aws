@@ -23,7 +23,7 @@
                 "PGADMIN_DEFAULT_PASSWORD": ""
             },
             "ports": {
-                "8080": "80"
+                "80": "TCP"
             }
         },
         "mattermost": {
@@ -65,18 +65,6 @@
                 "80": "HTTP",
                 "8080": "HTTP"
             }
-        }
-    },
-    "publicEndpoint": {
-        "containerName": "nginx",
-        "containerPort": 80,
-        "healthCheck": {
-            "healthyThreshold": 0,
-            "unhealthyThreshold": 0,
-            "timeoutSeconds": 0,
-            "intervalSeconds": 0,
-            "path": "",
-            "successCodes": ""
         }
     }
 }
