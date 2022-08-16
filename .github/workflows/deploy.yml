@@ -70,7 +70,7 @@ jobs:
             --image nginx
       - name: Make deploy setting
         run: |
-          export $(cat .env| grep -v '#' | xargs)
+          export $(cat .env | grep -v '^#' | xargs)
           service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("mmapp-db")) | .image' > db_image.txt
           # aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("pgadmin")) | .image' > pgadmin_image.txt
