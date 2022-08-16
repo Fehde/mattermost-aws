@@ -40,9 +40,6 @@ jobs:
           docker pull nginx
           docker compose build
           docker image ls
-      - name: UnDeploy
-        run: |
-          aws lightsail create-container-service-deployment --service-name ${{env.AWS_LIGHTSAIL_SERVICE_NAME}} --cli-input-json file://$(pwd)/container.blank.json
       # - name: Delete Image
       #   run: |
       #     service_name=${{env.AWS_LIGHTSAIL_SERVICE_NAME}}
