@@ -23,7 +23,7 @@
                 "PGADMIN_DEFAULT_PASSWORD": ""
             },
             "ports": {
-                "80": "HTTP"
+                "8080": "80"
             }
         },
         "mattermost": {
@@ -50,7 +50,7 @@
                 "MM_BLEVESETTINGS_ENABLEAUTOCOMPLETE": ""
             },
             "ports": {
-                "80": "HTTP"
+                "8065": "HTTP"
             }
         },
         "nginx": {
