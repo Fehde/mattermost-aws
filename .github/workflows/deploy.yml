@@ -40,8 +40,6 @@ jobs:
           docker pull nginx
           docker compose build
           docker image ls
-      - name: Disable Container Service
-        run: aws lightsail update-container-service --region ${{env.AWS_REGION}} --service-name ${{env.AWS_LIGHTSAIL_SERVICE_NAME}} --is-disabled
       - name: Delete Image
         run: |
           service_name=${{env.AWS_LIGHTSAIL_SERVICE_NAME}}
