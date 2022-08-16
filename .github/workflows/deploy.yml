@@ -81,6 +81,9 @@ jobs:
           | jq --arg pgadmin_image $(cat pgadmin_image.txt) '.containers.pgadmin.image=$pgadmin_image' \
           | jq --arg mm_image $(cat mm_image.txt) '.containers.mattermost.image=$mm_image' \
           | jq --arg nginx_image $(cat nginx_image.txt) '.containers.nginx.image=$nginx_image' \
+          | jq '.containers.db.environment.POSTGRES_USER=$POSTGRES_USER' \
+          | jq '.containers.db.environment.POSTGRES_PASSWORD=$POSTGRES_PASSWORD' \
+          | jq '.containers.db.environment.POSTGRES_DB=$POSTGRES_DB' \
           > container.json
           cat container.json
       - name: Deploy
