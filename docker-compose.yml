@@ -32,25 +32,25 @@ services:
                         - POSTGRES_USER
                         - POSTGRES_PASSWORD
                         - POSTGRES_DB
-        pgadmin:
-                depends_on:
-                        - db
-                image: dpage/pgadmin4
-                platform: linux/x86_64
-                container_name: pgadmin_mattermost
-                restart: ${RESTART_POLICY}
-                expose:
-                        - 80
-                security_opt:
-                        - no-new-privileges:true
-                pids_limit: 100
-                volumes:
-                        - type: volume
-                          source: pgadmin
-                          target: /var/lib/pgadmin
-                environment:
-                        - PGADMIN_DEFAULT_EMAIL
-                        - PGADMIN_DEFAULT_PASSWORD
+        # pgadmin:
+        #         depends_on:
+        #                 - db
+        #         image: dpage/pgadmin4
+        #         platform: linux/x86_64
+        #         container_name: pgadmin_mattermost
+        #         restart: ${RESTART_POLICY}
+        #         expose:
+        #                 - 80
+        #         security_opt:
+        #                 - no-new-privileges:true
+        #         pids_limit: 100
+        #         volumes:
+        #                 - type: volume
+        #                   source: pgadmin
+        #                   target: /var/lib/pgadmin
+        #         environment:
+        #                 - PGADMIN_DEFAULT_EMAIL
+        #                 - PGADMIN_DEFAULT_PASSWORD
         mattermost:
                 depends_on:
                         - db
