@@ -1,1 +1,1 @@
-# mattermost-docker
+# mattermost-docker-aws
