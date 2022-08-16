@@ -83,7 +83,6 @@ jobs:
           | jq --arg POSTGRES_USER $POSTGRES_USER '.containers.db.environment.POSTGRES_USER=$POSTGRES_USER' \
           | jq --arg POSTGRES_PASSWORD $POSTGRES_PASSWORD '.containers.db.environment.POSTGRES_PASSWORD=$POSTGRES_PASSWORD' \
           | jq --arg POSTGRES_DB $POSTGRES_DB '.containers.db.environment.POSTGRES_DB=$POSTGRES_DB' \
-          > container.json \
           | jq --arg TZ $TZ '.containers.mattermost.environment.TZ=$TZ' \
           | jq --arg MM_SQLSETTINGS_DRIVERNAME $MM_SQLSETTINGS_DRIVERNAME '.containers.mattermost.environment.MM_SQLSETTINGS_DRIVERNAME=$MM_SQLSETTINGS_DRIVERNAME' \
           | jq --arg MM_SQLSETTINGS_DATASOURCE $MM_SQLSETTINGS_DATASOURCE '.containers.mattermost.environment.MM_SQLSETTINGS_DATASOURCE=$MM_SQLSETTINGS_DATASOURCE' \
@@ -100,7 +99,6 @@ jobs:
           | jq --arg MM_BLEVESETTINGS_ENABLEINDEXING $MM_BLEVESETTINGS_ENABLEINDEXING '.containers.mattermost.environment.MM_BLEVESETTINGS_ENABLEINDEXING=$MM_BLEVESETTINGS_ENABLEINDEXING' \
           | jq --arg MM_BLEVESETTINGS_ENABLESEARCHING $MM_BLEVESETTINGS_ENABLESEARCHING '.containers.mattermost.environment.MM_BLEVESETTINGS_ENABLESEARCHING=$MM_BLEVESETTINGS_ENABLESEARCHING' \
           | jq --arg MM_BLEVESETTINGS_ENABLEAUTOCOMPLETE $MM_BLEVESETTINGS_ENABLEAUTOCOMPLETE '.containers.mattermost.environment.MM_BLEVESETTINGS_ENABLEAUTOCOMPLETE=$MM_BLEVESETTINGS_ENABLEAUTOCOMPLETE' \
-          | jq --arg TZ $TZ '.containers.mattermost.environment.TZ=$TZ' \
           > container.json
           cat container.json
       - name: Deploy
