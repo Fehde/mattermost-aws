@@ -71,19 +71,22 @@ jobs:
       - name: Confirm Image
         run: |
           aws lightsail get-container-images --service-name ${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
-      - name: Deploy
+      - name: Make deploy setting
         run: |
           export $(cat .env| grep -v '#' | xargs)
           echo $MM_SQLSETTINGS_DATASOURCE
           service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("mmapp-db")) | .image' > db_image.txt
-          cat db_image.txt
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("pgadmin")) | .image' > pgadmin_image.txt
-          cat pgadmin_image.txt
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("mattermost")) | .image' > mm_image.txt
-          cat mm_image.txt
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '.containerImages[] | select(.image | contains("nginx")) | .image' > nginx_image.txt
-          cat nginx_image.txt
-          jq --arg db_image $(cat db_image.txt) --arg mm_image $(cat mm_image.txt) '.containers.db.image=$db_image' container.template.json > container.json
+          cat container.template.json \
+          | jq --arg db_image $(cat db_image.txt) '.containers.db.image=$db_image' \
+          | jq --arg pgadmin_image $(cat pgadmin_image.txt) '.containers.pgadmin.image=$pgadmin_image' \
+          | jq --arg mm_image $(cat mm_image.txt) '.containers.mattermost.image=$mm_image' \
+          | jq --arg nginx_image $(cat nginx_image.txt) '.containers.nginx.image=$nginx_image' \
+           container.template.json > container.json
           cat container.json
+      - name: Deploy
+        run: |
           aws lightsail create-container-service-deployment --service-name ${service_name} --cli-input-json file://$(pwd)/container.json
