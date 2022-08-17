@@ -6,5 +6,5 @@ ENV	LANG $DB_LANG.utf8
 EXPOSE 5432/tcp
 
 ADD ./postgresql/init-script/* /docker-entrypoint-initdb.d
-RUN chmod +r /docker-entrypoint-initdb.d
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+# RUN chmod +r /docker-entrypoint-initdb.d
+# RUN chmod +x /usr/local/bin/docker-entrypoint.sh
