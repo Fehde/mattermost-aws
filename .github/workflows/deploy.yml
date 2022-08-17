@@ -30,14 +30,14 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{env.AWS_REGION}}
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Pull and Build Docker Image
         run: |
           # docker pull dpage/pgadmin4
           docker pull mattermost/mattermost-enterprise-edition:7.1.2
-          docker pull nginx
+          # docker pull nginx
           docker compose build
           docker image ls
       # - name: Delete Image
@@ -49,22 +49,22 @@ jobs:
         run: |
           service_name=${{env.AWS_LIGHTSAIL_SERVICE_NAME}}
           aws lightsail push-container-image \
-            --region ${{ env.AWS_REGION }} \
+            --region ${{env.AWS_REGION}} \
             --service-name ${service_name} \
             --label mmapp-db \
             --image mmapp-db
           # aws lightsail push-container-image \
-          #   --region ${{ env.AWS_REGION }} \
+          #   --region ${{env.AWS_REGION}} \
           #   --service-name ${service_name} \
           #   --label pgadmin \
           #   --image dpage/pgadmin4
           aws lightsail push-container-image \
-            --region ${{ env.AWS_REGION }} \
+            --region ${{env.AWS_REGION}} \
             --service-name ${service_name} \
             --label mattermost \
             --image mattermost/mattermost-enterprise-edition:7.1.2
           aws lightsail push-container-image \
-            --region ${{ env.AWS_REGION }} \
+            --region ${{env.AWS_REGION}} \
             --service-name ${service_name} \
             --label mmapp-nginx \
             --image mmapp-nginx
