@@ -59,7 +59,7 @@
             "healthyThreshold": 0,
             "unhealthyThreshold": 0,
             "timeoutSeconds": 30,
-            "intervalSeconds": 5,
+            "intervalSeconds": 60,
             "path": "",
             "successCodes": ""
         }
