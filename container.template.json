@@ -4,7 +4,6 @@
         "db": {
             "image": "",
             "command": [
-                ""
             ],
             "environment": {
                 "DB_LANG": "ja_JP",
@@ -19,7 +18,6 @@
         "mattermost": {
             "image": "",
             "command": [
-                ""
             ],
             "environment": {
                 "TZ": "",
@@ -46,7 +44,6 @@
         "nginx": {
             "image": "",
             "command": [
-                ""
             ],
             "environment": {
             },
