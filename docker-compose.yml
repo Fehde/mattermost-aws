@@ -7,35 +7,35 @@ services:
                         dockerfile: ./postgresql/Dockerfile
                         args:
                                 - DB_LANG=ja_JP
-                # expose:
-                #         - 5432
-                # environment:
-                #         - POSTGRES_USER
-                #         - POSTGRES_PASSWORD
-                #         - POSTGRES_DB
+                expose:
+                        - 5432
+                environment:
+                        - POSTGRES_USER
+                        - POSTGRES_PASSWORD
+                        - POSTGRES_DB
         mattermost:
                 depends_on:
                         - db
                 image: mattermost/${MATTERMOST_IMAGE}:${MATTERMOST_IMAGE_TAG}
-                # expose:
-                #         - 8065
-                # environment:
-                #         - TZ
-                #         - MM_SQLSETTINGS_DRIVERNAME
-                #         - MM_SQLSETTINGS_DATASOURCE
-                #         - MM_SERVICESETTINGS_SITEURL
-                #         - MM_SERVICESETTINGS_ENABLEAPICHANNELDELETION
-                #         - MM_SERVICESETTINGS_ENABLETUTORIAL
-                #         - MM_LOCALIZATIONSETTINGS_DEFAULTSERVERLOCALE
-                #         - MM_LOCALIZATIONSETTINGS_DEFAULTCLIENTLOCALE
-                #         - MM_TEAMSETTINGS_MAXUSERSPERTEAM
-                #         - MM_TEAMSETTINGS_MAXCHANNELSPERTEAM
-                #         - MM_PLUGINSETTINGS_ENABLE
-                #         - MM_PLUGINSETTINGS_ENABLEUPLOADS
-                #         - MM_BLEVESETTINGS_INDEXDIR
-                #         - MM_BLEVESETTINGS_ENABLEINDEXING
-                #         - MM_BLEVESETTINGS_ENABLESEARCHING
-                #         - MM_BLEVESETTINGS_ENABLEAUTOCOMPLETE
+                expose:
+                        - 8065
+                environment:
+                        - TZ
+                        - MM_SQLSETTINGS_DRIVERNAME
+                        - MM_SQLSETTINGS_DATASOURCE
+                        - MM_SERVICESETTINGS_SITEURL
+                        - MM_SERVICESETTINGS_ENABLEAPICHANNELDELETION
+                        - MM_SERVICESETTINGS_ENABLETUTORIAL
+                        - MM_LOCALIZATIONSETTINGS_DEFAULTSERVERLOCALE
+                        - MM_LOCALIZATIONSETTINGS_DEFAULTCLIENTLOCALE
+                        - MM_TEAMSETTINGS_MAXUSERSPERTEAM
+                        - MM_TEAMSETTINGS_MAXCHANNELSPERTEAM
+                        - MM_PLUGINSETTINGS_ENABLE
+                        - MM_PLUGINSETTINGS_ENABLEUPLOADS
+                        - MM_BLEVESETTINGS_INDEXDIR
+                        - MM_BLEVESETTINGS_ENABLEINDEXING
+                        - MM_BLEVESETTINGS_ENABLESEARCHING
+                        - MM_BLEVESETTINGS_ENABLEAUTOCOMPLETE
         nginx:
                 depends_on:
                         - db
@@ -45,7 +45,7 @@ services:
                         dockerfile: ./nginx/Dockerfile
                         args:
                                 - NGINX_IMAGE_TAG=${NGINX_IMAGE_TAG}
-                # environment:
-                #         - NGINX_IMAGE_TAG
-                # ports:
-                #         - ${HTTP_PORT}:80
+                environment:
+                        - NGINX_IMAGE_TAG
+                ports:
+                        - ${HTTP_PORT}:80
