@@ -7,4 +7,4 @@ EXPOSE 80/tcp
 ADD ./nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
 # 検証時
-CMD ["nginx-debug", "-g", "daemon off;"]
+# CMD ["nginx-debug", "-g", "daemon off;"]
