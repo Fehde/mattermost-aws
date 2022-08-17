@@ -66,8 +66,8 @@ jobs:
           aws lightsail push-container-image \
             --region ${{ env.AWS_REGION }} \
             --service-name ${service_name} \
-            --label nginx \
-            --image nginx
+            --label mmapp-nginx \
+            --image mmapp-nginx
       - name: Make deploy setting
         run: |
           export $(cat .env | grep -v '^#' | xargs)
@@ -75,7 +75,7 @@ jobs:
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '[.containerImages[] | select(.image | contains("mmapp-db")) | .image][0]' > db_image.txt
           # aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '[.containerImages[] | select(.image | contains("pgadmin")) | .image][0]' > pgadmin_image.txt
           aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '[.containerImages[] | select(.image | contains("mattermost")) | .image][0]' > mm_image.txt
-          aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '[.containerImages[] | select(.image | contains("nginx")) | .image][0]' > nginx_image.txt
+          aws lightsail get-container-images --service-name ${service_name} | jq --raw-output '[.containerImages[] | select(.image | contains("mmapp-nginx")) | .image][0]' > nginx_image.txt
           cat container.template.json \
           | jq --arg service_name ${service_name} '.serviceName=$service_name' \
           | jq --arg db_image $(cat db_image.txt) '.containers.db.image=$db_image' \
